@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QGAMING | ویدیوهای تازه و برنامه آپلود</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!--
+  راه‌اندازی YouTube Data API:
+  ۱) در Google Cloud یک پروژه بسازید و YouTube Data API v3 را فعال کنید.
+  ۲) یک API key بسازید و آن را در CONFIG.YOUTUBE_API_KEY قرار دهید.
+  ۳) کلید را به YouTube Data API v3 محدود کنید و برای دامنه سایت، HTTP referrer بگذارید.
+  کلید API مرورگر محرمانه نیست؛ محدودسازی دامنه و API ضروری است.
+-->
+<style>
+:root{color-scheme:dark;--bg:#090713;--panel:#151126;--panel2:#1c1532;--line:#30234d;--text:#f7f2ff;--muted:#a99cbe;--purple:#a855f7;--cyan:#42e8e0;--green:#55e6a5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}html,body{margin:0;min-height:100%}
+body{background:radial-gradient(ellipse at 12% 0%,#291344 0,transparent 34%),radial-gradient(ellipse at 92% 18%,#102b3a 0,transparent 28%),var(--bg);color:var(--text);font-family:"Vazirmatn",Tahoma,sans-serif;line-height:1.75;padding:0 17px 54px}
+.wrap{max-width:1040px;margin:0 auto}a{color:inherit;text-decoration:none}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:23px 0}
+.brand{display:flex;align-items:center;gap:11px}.brand-mark{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(140deg,var(--purple),#5b37c9 55%,#168c9b);box-shadow:0 7px 28px #8b35d544;font-weight:900;font-size:1.25rem}.brand h1{margin:0;font-size:1.25rem;font-weight:900;letter-spacing:.4px}.brand small{display:block;color:var(--muted);font-size:.72rem;margin-top:-3px;letter-spacing:1.6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(110deg,#9333ea,#6d4be8);color:#fff;border:1px solid #c084fc55;border-radius:12px;padding:9px 16px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 7px 22px #9333ea2a;transition:transform .2s,filter .2s}.btn:hover{transform:translateY(-2px);filter:brightness(1.12)}.btn.ghost{background:#ffffff08;border:1px solid var(--line);color:#d8c4ff;box-shadow:none}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(120deg,#21143aee,#111a2bee);border:1px solid #7652a566;border-radius:25px;padding:32px 20px;text-align:center;box-shadow:0 20px 60px #0005}.hero:before,.hero:after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(2px);pointer-events:none}.hero:before{width:240px;height:240px;right:-110px;top:-145px;background:#a855f755}.hero:after{width:220px;height:220px;left:-100px;bottom:-150px;background:#22d3ee30}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border:1px solid #a855f755;border-radius:30px;color:#dfc5ff;background:#a855f714;font-size:.8rem}.eyebrow i{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green)}.hero p{margin:9px 0 0;color:var(--muted)}.hero .what{color:var(--text);font-weight:800;font-size:1.18rem;margin-top:8px}
+.clock{display:flex;justify-content:center;gap:11px;direction:ltr;margin:22px 0 8px}.clock div{min-width:76px;padding:12px 8px;background:#0907139c;border:1px solid #8060aa66;border-radius:15px;backdrop-filter:blur(8px)}.clock b{display:block;font-size:2.15rem;font-weight:900;line-height:1.2;background:linear-gradient(180deg,#fff,#b99aff);background-clip:text;-webkit-background-clip:text;color:transparent;font-variant-numeric:tabular-nums}.clock span{font-size:.77rem;color:var(--muted)}#nextAt{font-size:.9rem}
+#alert{display:none;margin:16px 0 0;padding:13px 16px;border-radius:15px;background:linear-gradient(100deg,#6d28d9,#a855f7);color:#fff;font-weight:700;box-shadow:0 8px 28px #9333ea30}#alert.on{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}#alert a{background:#fff;color:#5b21b6;border-radius:9px;padding:5px 14px}
+section{margin-top:38px}h2{font-size:1.13rem;margin:0 0 4px;font-weight:800}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.section-mark{width:4px;height:23px;border-radius:5px;background:linear-gradient(var(--purple),var(--cyan));margin-left:9px}.section-title{display:flex;align-items:center}.sub{margin:0 0 15px;color:var(--muted);font-size:.88rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}.dot.live{background:var(--green);box-shadow:0 0 12px #55e6a5aa;animation:p 2s infinite}@keyframes p{50%{opacity:.35}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:16px}
+.load-more-wrap{display:flex;justify-content:center;margin-top:20px}.load-more{min-width:190px}.load-more[hidden]{display:none}
+.v .meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:9px;color:var(--muted);font-size:.75rem}
+.v .meta span{display:inline-flex;align-items:center;gap:5px}.v .meta .views{color:#cbb8ed}.v .date{display:block;color:#a99cbe;font-size:.76rem;margin-top:7px}
+.v .duration{position:absolute;bottom:9px;left:9px;background:#090713e8;border:1px solid #ffffff24;border-radius:7px;padding:1px 7px;font-size:.72rem;direction:ltr}
+.api-help{padding:17px;border:1px solid #7352a866;background:linear-gradient(120deg,#21143a,#111a2b);border-radius:15px;color:#d8cbed}.api-help strong{color:#fff}.api-help code{direction:ltr;display:inline-block;color:#8ff5ef;background:#080610;padding:3px 7px;border-radius:6px;font-size:.85rem}
+.v{background:linear-gradient(145deg,#1b1530,#100d1c);border:1px solid var(--line);border-radius:17px;overflow:hidden;display:block;box-shadow:0 9px 26px #0003;transition:transform .22s,border-color .22s,box-shadow .22s}.v:hover{transform:translateY(-5px);border-color:#a855f7;box-shadow:0 15px 34px #8b35d52b}.v .t{position:relative;aspect-ratio:16/9;background:#080610;overflow:hidden}.v img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.v:hover img{transform:scale(1.045)}.v .k{position:absolute;top:10px;right:10px;background:#090713dc;border:1px solid #ffffff24;border-radius:8px;padding:2px 10px;font-size:.75rem;backdrop-filter:blur(8px)}.v .m{padding:12px 14px 14px}.v .m strong{display:block;font-size:.94rem;font-weight:700;line-height:1.65;min-height:3.1em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.v .m small{display:block;color:var(--muted);font-size:.78rem;margin-top:6px}.empty{padding:26px 18px;border:1px dashed #60477f;border-radius:16px;color:var(--muted);text-align:center;background:#ffffff05}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:9px}.day{background:linear-gradient(145deg,#1a142c,#110e1d);border:1px solid var(--line);border-radius:14px;padding:12px 5px;text-align:center;min-height:100px;font-size:.82rem;transition:border-color .2s,transform .2s}.day:hover{transform:translateY(-3px);border-color:#7852a8}.day.has{border-color:#8753bf;background:linear-gradient(145deg,#26173e,#151126)}.day.today{outline:1px solid var(--cyan);outline-offset:2px}.day h3{margin:0 0 7px;font-size:.85rem;font-weight:700;color:var(--muted)}.day.has h3{color:#d9b8ff}.day b{display:block;font-size:.98rem;color:var(--cyan)}.day em{font-style:normal;color:var(--muted);font-size:.72rem;display:block;margin-top:3px}.note{margin-top:12px;color:var(--muted);font-size:.83rem;padding:10px 13px;border-right:2px solid var(--purple);background:#ffffff05;border-radius:8px}
+footer{text-align:center;color:#827494;font-size:.75rem;margin-top:42px;padding-top:18px;border-top:1px solid #ffffff10}
+@media(max-width:650px){.week{grid-template-columns:repeat(2,1fr)}.day{min-height:0}.clock{gap:7px}.clock div{min-width:59px;padding:10px 5px}.clock b{font-size:1.65rem}.hero{padding:26px 12px}.brand h1{font-size:1.1rem}.btn{padding:8px 12px;font-size:.85rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><div class="brand-mark">Q</div><div><h1>QGAMING</h1><small>PLAY • WATCH • REPEAT</small></div></div>
+  <a class="btn" id="chLink" href="https://youtube.com/@qgaming_ir" target="_blank" rel="noopener">▶ رفتن به کانال</a>
+</header>
+
+<div class="hero">
+  <span class="eyebrow"><i></i> برنامه انتشار QGAMING</span>
+  <p>آپلود بعدی</p>
+  <p class="what" id="nextWhat">...</p>
+  <div class="clock" aria-live="off">
+    <div><b id="cS">۰۰</b><span>ثانیه</span></div>
+    <div><b id="cM">۰۰</b><span>دقیقه</span></div>
+    <div><b id="cH">۰۰</b><span>ساعت</span></div>
+    <div><b id="cD">۰</b><span>روز</span></div>
+  </div>
+  <p id="nextAt"></p>
+</div>
+
+<div id="alert" role="status">
+  <span id="alertText"></span>
+  <a id="alertLink" href="#" target="_blank" rel="noopener">دیدن ویدیو</a>
+</div>
+
+<section>
+  <div class="section-head"><div class="section-title"><span class="section-mark"></span><h2>تازه‌ترین ویدیوها</h2></div></div>
+  <p class="sub"><span class="dot" id="dot"></span><span id="status">در حال بارگذاری...</span>
+    <button class="btn ghost" id="notifBtn" type="button" hidden>روشن کردن اعلان مرورگر</button></p>
+  <div class="grid" id="grid"></div>
+  <div class="load-more-wrap"><button class="btn ghost load-more" id="loadMoreBtn" type="button" hidden>نمایش ویدیوهای قدیمی‌تر</button></div>
+</section>
+
+<section>
+  <div class="section-head"><div class="section-title"><span class="section-mark"></span><h2>برنامه آپلود هفتگی</h2></div></div>
+  <p class="sub">ساعت‌ها به وقت ایران است.</p>
+  <div class="week" id="week"></div>
+  <p class="note">ویدیو بلند فقط وقتی آماده باشد پنجشنبه ساعت ۱۶:۳۰ منتشر می‌شود.</p>
+</section>
+<footer>QGAMING · ساخته‌شده برای جامعه گیمینگ</footer>
+</div>
+
+<script>
+const CONFIG = {
+  // کلید YouTube Data API v3 برای اتصال کانال تنظیم شده است.
+  YOUTUBE_API_KEY: "YOUR_YOUTUBE_DATA_API_KEY",
+  CHANNEL_HANDLE: "@QGAMING_ir",
+  CHANNEL: "https://youtube.com/@QGAMING_ir",
+  POLL_MS: 180000, // بررسی خودکار ویدیوهای تازه هر ۳ دقیقه
+  PAGE_SIZE: 50
+};
+
+const YT_API = "https://www.googleapis.com/youtube/v3";
+let uploadsPlaylistId = null;
+let nextPageToken = null;
+let loadingMore = false;
+let firstLoadDone = false;
+let videos = [];
+// day: 0=یکشنبه ... 4=پنجشنبه 5=جمعه 6=شنبه
+const SLOTS = [
+  {day:4, h:16, m:30, label:"شورت اول و ویدیو بلند"},
+  {day:5, h:16, m:30, label:"شورت دوم"}
+];
+const DAYS = [[6,"شنبه"],[0,"یکشنبه"],[1,"دوشنبه"],[2,"سه‌شنبه"],[3,"چهارشنبه"],[4,"پنجشنبه"],[5,"جمعه"]];
+const OFF = 3.5 * 36e5; // GMT+3:30
+
+const $ = id => document.getElementById(id);
+const fa = s => String(s).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+const p2 = n => fa(String(n).padStart(2, "0"));
+const tehran = t => new Date(t + OFF);
+
+$("chLink").href = CONFIG.CHANNEL;
+
+function nextSlot(){
+  const now = Date.now(), t = tehran(now);
+  let best = null;
+  for (const s of SLOTS) {
+    for (let d = 0; d < 8; d++) {
+      const base = Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate() + d, s.h, s.m);
+      const at = base - OFF;
+      if (new Date(base).getUTCDay() === s.day && at > now) {
+        if (!best || at < best.at) best = {at, s};
+        break;
+      }
+    }
+  }
+  return best;
+}
+
+function tick(){
+  const n = nextSlot();
+  if (!n) return;
+  let diff = Math.max(0, n.at - Date.now());
+  const d = Math.floor(diff / 864e5); diff %= 864e5;
+  const h = Math.floor(diff / 36e5); diff %= 36e5;
+  const m = Math.floor(diff / 6e4), s = Math.floor((diff % 6e4) / 1e3);
+  $("cD").textContent = fa(d); $("cH").textContent = p2(h);
+  $("cM").textContent = p2(m); $("cS").textContent = p2(s);
+  const dn = DAYS.find(x => x[0] === n.s.day)[1];
+  $("nextWhat").textContent = n.s.label;
+  $("nextAt").textContent = dn + " ساعت " + fa(n.s.h + ":" + String(n.s.m).padStart(2, "0"));
+}
+
+function drawWeek(){
+  const today = tehran(Date.now()).getUTCDay();
+  $("week").innerHTML = "";
+  for (const [num, name] of DAYS) {
+    const slots = SLOTS.filter(s => s.day === num);
+    const el = document.createElement("div");
+    el.className = "day" + (slots.length ? " has" : "") + (num === today ? " today" : "");
+    const h = document.createElement("h3"); h.textContent = name; el.appendChild(h);
+    if (!slots.length) { const e = document.createElement("em"); e.textContent = "استراحت"; el.appendChild(e); }
+    for (const s of slots) {
+      const b = document.createElement("b"); b.textContent = fa(s.h + ":" + String(s.m).padStart(2, "0"));
+      const e = document.createElement("em"); e.textContent = s.label;
+      el.append(b, e);
+    }
+    $("week").appendChild(el);
+  }
+}
+
+function ago(iso){
+  const m = Math.max(0, Math.round((Date.now() - new Date(iso)) / 6e4));
+  if (m < 1) return "همین الان";
+  if (m < 60) return fa(m) + " دقیقه پیش";
+  if (m < 1440) return fa(Math.round(m / 60)) + " ساعت پیش";
+  return fa(Math.round(m / 1440)) + " روز پیش";
+}
+
+function publishedDate(iso){
+  try {
+    return new Intl.DateTimeFormat("fa-IR", {
+      dateStyle:"long", timeStyle:"short", timeZone:"Asia/Tehran"
+    }).format(new Date(iso));
+  } catch (_) { return new Date(iso).toLocaleString("fa-IR"); }
+}
+
+function formatViews(value){
+  const n = Number(value || 0);
+  return new Intl.NumberFormat("fa-IR").format(n) + " بازدید";
+}
+
+function parseDuration(iso){
+  const m = String(iso || "").match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!m) return "";
+  const h = Number(m[1] || 0), min = Number(m[2] || 0), sec = Number(m[3] || 0);
+  return h ? [h, String(min).padStart(2,"0"), String(sec).padStart(2,"0")].join(":")
+           : min + ":" + String(sec).padStart(2,"0");
+}
+
+function bestThumbnail(thumbnails, videoId){
+  const order = ["maxres","standard","high","medium","default"];
+  for (const key of order) {
+    if (thumbnails && thumbnails[key] && thumbnails[key].url) return thumbnails[key].url;
+  }
+  return "https://i.ytimg.com/vi/" + encodeURIComponent(videoId) + "/hqdefault.jpg";
+}
+
+function render(list){
+  const grid = $("grid"); grid.innerHTML = "";
+  if (!list.length) {
+    grid.innerHTML = '<div class="empty">هنوز ویدیوی عمومی برای نمایش پیدا نشد.</div>';
+    return;
+  }
+  const fragment = document.createDocumentFragment();
+  for (const v of list) {
+    const a = document.createElement("a");
+    a.className = "v"; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.href = "https://www.youtube.com/watch?v=" + encodeURIComponent(v.video_id);
+    a.setAttribute("aria-label", v.title);
+
+    const t = document.createElement("div"); t.className = "t";
+    const img = document.createElement("img");
+    img.loading = "lazy"; img.decoding = "async"; img.alt = "تصویر بندانگشتی " + v.title;
+    img.src = v.thumbnail || ("https://i.ytimg.com/vi/" + encodeURIComponent(v.video_id) + "/hqdefault.jpg");
+    img.onerror = () => {
+      if (!img.dataset.fallback) {
+        img.dataset.fallback = "1";
+        img.src = "https://i.ytimg.com/vi/" + encodeURIComponent(v.video_id) + "/hqdefault.jpg";
+      } else if (!img.dataset.lastFallback) {
+        img.dataset.lastFallback = "1";
+        img.src = "https://i.ytimg.com/vi/" + encodeURIComponent(v.video_id) + "/mqdefault.jpg";
+      }
+    };
+    const k = document.createElement("span"); k.className = "k";
+    const duration = Number(v.durationSeconds || 0);
+    k.textContent = duration > 0 && duration <= 180 ? "ویدیوی کوتاه" : "ویدیو";
+    t.append(img, k);
+    const dur = document.createElement("span"); dur.className = "duration"; dur.textContent = v.duration || "";
+    if (v.duration) t.appendChild(dur);
+
+    const m = document.createElement("div"); m.className = "m";
+    const title = document.createElement("strong"); title.textContent = v.title;
+    const date = document.createElement("small"); date.className = "date";
+    date.textContent = "انتشار: " + publishedDate(v.published_at);
+    const meta = document.createElement("div"); meta.className = "meta";
+    const views = document.createElement("span"); views.className = "views";
+    views.textContent = "▶ " + formatViews(v.views);
+    const relative = document.createElement("span"); relative.textContent = ago(v.published_at);
+    meta.append(views, relative);
+    m.append(title, date, meta);
+    a.append(t, m); fragment.appendChild(a);
+  }
+  grid.appendChild(fragment);
+}
+
+function setApiStatus(message, live=false){
+  $("dot").className = live ? "dot live" : "dot";
+  $("status").textContent = message;
+}
+
+async function youtubeGet(resource, params={}){
+  const url = new URL(YT_API + "/" + resource);
+  Object.entries(params).forEach(([k,v]) => {
+    if (v !== undefined && v !== null && v !== "") url.searchParams.set(k, String(v));
+  });
+  // کلید در هدر فرستاده می‌شود تا داخل URL و تاریخچه مرورگر قرار نگیرد.
+  const response = await fetch(url.toString(), {
+    headers: {"X-Goog-Api-Key": CONFIG.YOUTUBE_API_KEY}
+  });
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const reason = body && body.error && body.error.errors && body.error.errors[0]
+      ? body.error.errors[0].reason : "unknown";
+    const messages = {
+      keyInvalid:"کلید YouTube API نامعتبر است.",
+      accessNotConfigured:"YouTube Data API v3 در پروژه Google Cloud فعال نشده است.",
+      quotaExceeded:"سهمیه روزانه YouTube API تمام شده است.",
+      ipRefererBlocked:"محدودیت دامنه (HTTP referrer) کلید API اجازه این سایت را نمی‌دهد.",
+      refererNotAllowed:"دامنه فعلی در محدودیت HTTP referrer کلید API مجاز نیست."
+    };
+    throw new Error(messages[reason] || (body.error && body.error.message) || "خطا در ارتباط با YouTube API (" + response.status + ").");
+  }
+  return body;
+}
+
+async function getUploadsPlaylist(){
+  if (uploadsPlaylistId) return uploadsPlaylistId;
+  const data = await youtubeGet("channels", {
+    part:"snippet,contentDetails", forHandle:CONFIG.CHANNEL_HANDLE, maxResults:1
+  });
+  const channel = data.items && data.items[0];
+  if (!channel || !channel.contentDetails || !channel.contentDetails.relatedPlaylists) {
+    throw new Error("کانال با شناسه " + CONFIG.CHANNEL_HANDLE + " پیدا نشد؛ هندل کانال را بررسی کنید.");
+  }
+  uploadsPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
+  if (channel.snippet && channel.snippet.title) {
+    $("status").textContent = "کانال متصل شد: " + channel.snippet.title + "؛ دریافت ویدیوها...";
+  }
+  return uploadsPlaylistId;
+}
+
+async function fetchPlaylistPage(pageToken=""){
+  const playlistId = await getUploadsPlaylist();
+  const page = await youtubeGet("playlistItems", {
+    part:"snippet,contentDetails", playlistId, maxResults:CONFIG.PAGE_SIZE, pageToken
+  });
+  const rawItems = (page.items || []).filter(item =>
+    item.contentDetails && item.contentDetails.videoId && item.snippet && !item.snippet.title?.toLowerCase().includes("deleted video")
+  );
+  const ids = rawItems.map(item => item.contentDetails.videoId);
+  let detailMap = new Map();
+  // جزئیات و آمار هر ۵۰ ویدیو در یک درخواست دریافت می‌شود.
+  for (let i=0; i<ids.length; i+=50) {
+    const detail = await youtubeGet("videos", {
+      part:"snippet,contentDetails,statistics", id:ids.slice(i,i+50).join(",")
+    });
+    for (const video of (detail.items || [])) detailMap.set(video.id, video);
+  }
+
+  const pageVideos = rawItems.map(item => {
+    const id = item.contentDetails.videoId;
+    const detail = detailMap.get(id);
+    const snippet = detail?.snippet || item.snippet;
+    const durationIso = detail?.contentDetails?.duration || "";
+    return {
+      video_id:id,
+      title:snippet.title || item.snippet.title || "ویدیوی بدون عنوان",
+      published_at:item.contentDetails.videoPublishedAt || item.snippet.publishedAt || snippet.publishedAt,
+      thumbnail:bestThumbnail(snippet.thumbnails || item.snippet.thumbnails, id),
+      views:detail?.statistics?.viewCount || 0,
+      duration:parseDuration(durationIso),
+      durationSeconds:durationIso ? (() => {
+        const d=durationIso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+        return d ? Number(d[1]||0)*3600+Number(d[2]||0)*60+Number(d[3]||0) : 0;
+      })() : 0
+    };
+  }).filter(v => v.published_at);
+
+  return {items:pageVideos, nextPageToken:page.nextPageToken || null, total:page.pageInfo?.totalResults || null};
+}
+
+function mergeVideos(items){
+  const map = new Map(videos.map(v => [v.video_id,v]));
+  for (const item of items) map.set(item.video_id, {...map.get(item.video_id), ...item});
+  videos = Array.from(map.values()).sort((a,b) => new Date(b.published_at)-new Date(a.published_at));
+  render(videos);
+}
+
+async function loadLatest(isRefresh=false){
+  if (!CONFIG.YOUTUBE_API_KEY || CONFIG.YOUTUBE_API_KEY === "YOUR_YOUTUBE_DATA_API_KEY") {
+    setApiStatus("کلید YouTube Data API هنوز در CONFIG وارد نشده است.");
+    $("grid").innerHTML = '<div class="api-help"><strong>اتصال کانال آماده است؛ فقط کلید API باقی مانده.</strong><br>در Google Cloud، سرویس <b>YouTube Data API v3</b> را فعال کنید، API key بسازید و آن را در مقدار <code>YOUTUBE_API_KEY</code> در ابتدای کد قرار دهید.</div>';
+    $("loadMoreBtn").hidden = true;
+    return;
+  }
+  try {
+    setApiStatus(isRefresh ? "در حال بررسی آپلودهای تازه..." : "در حال دریافت ویدیوهای کانال از یوتیوب...");
+    const page = await fetchPlaylistPage("");
+    const previousIds = seenIds();
+    const newIds = page.items.map(v => v.video_id);
+    if (firstLoadDone && previousIds) {
+      const fresh = page.items.filter(v => !previousIds.includes(v.video_id));
+      if (fresh.length) announce(fresh[0]);
+    }
+    mergeVideos(page.items);
+    // هنگام تازه‌سازی، صفحه‌بندی قدیمی‌تر را در صورت بارگذاری صفحات قبلی حفظ کن.
+    if (videos.length <= page.items.length || !nextPageToken) nextPageToken = page.nextPageToken;
+    saveIds(newIds);
+    firstLoadDone = true;
+    $("loadMoreBtn").hidden = !nextPageToken;
+    setApiStatus("اتصال مستقیم به یوتیوب برقرار است | " + fa(page.total || videos.length) + " ویدیو در کانال", true);
+  } catch (e) {
+    setApiStatus(e.message || "دریافت ویدیوها از یوتیوب ناموفق بود.");
+    if (!videos.length) $("grid").innerHTML = '<div class="empty">' + (e.message || "خطا در دریافت ویدیوها") + '</div>';
+  }
+}
+
+async function loadMore(){
+  if (!nextPageToken || loadingMore) return;
+  loadingMore = true;
+  const button = $("loadMoreBtn");
+  button.disabled = true;
+  button.textContent = "در حال دریافت...";
+  try {
+    const page = await fetchPlaylistPage(nextPageToken);
+    mergeVideos(page.items);
+    nextPageToken = page.nextPageToken;
+    button.hidden = !nextPageToken;
+    setApiStatus("ویدیوهای بیشتری بارگذاری شدند | " + fa(videos.length) + " ویدیو نمایش داده می‌شود", true);
+  } catch (e) {
+    setApiStatus(e.message || "دریافت صفحه بعدی انجام نشد.");
+  } finally {
+    loadingMore = false;
+    button.disabled = false;
+    button.textContent = "نمایش ویدیوهای قدیمی‌تر";
+  }
+}
+
+function seenIds(){ try { return JSON.parse(localStorage.getItem("qg_seen") || "null"); } catch (e) { return null; } }
+function saveIds(ids){ try { localStorage.setItem("qg_seen", JSON.stringify(ids)); } catch (e) {} }
+
+function announce(v){
+  $("alertText").textContent = "ویدیو تازه: " + v.title;
+  $("alertLink").href = (v.kind === "short" ? "https://www.youtube.com/shorts/" : "https://www.youtube.com/watch?v=") + encodeURIComponent(v.video_id);
+  $("alert").classList.add("on");
+  document.title = "● ویدیو تازه | QGAMING";
+  if ("Notification" in window && Notification.permission === "granted") {
+    new Notification("QGAMING: ویدیو تازه", {body: v.title});
+  }
+}
+
+$("loadMoreBtn").addEventListener("click", loadMore);
+
+if ("Notification" in window && Notification.permission === "default") {
+  $("notifBtn").hidden = false;
+  $("notifBtn").onclick = async () => { await Notification.requestPermission(); $("notifBtn").hidden = true; };
+}
+
+drawWeek(); tick(); loadLatest(false);
+setInterval(tick, 1000);
+// تازه‌ترین آپلودها را دوره‌ای از یوتیوب می‌گیرد.
+setInterval(() => loadLatest(true), CONFIG.POLL_MS);
+</script>
+</body>
+</html>
