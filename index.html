@@ -84,7 +84,7 @@ footer{text-align:center;color:#827494;font-size:.75rem;margin-top:42px;padding-
 <script>
 const CONFIG = {
   // کلید YouTube Data API v3 برای اتصال کانال تنظیم شده است.
-  YOUTUBE_API_KEY: "YOUR_YOUTUBE_DATA_API_KEY",
+  YOUTUBE_API_KEY: "AIzaSyDoNMT5D8qAbIe2a47lq-B09wzonZud6Uk",
   CHANNEL_HANDLE: "@QGAMING_ir",
   CHANNEL: "https://youtube.com/@QGAMING_ir",
   POLL_MS: 180000, // بررسی خودکار ویدیوهای تازه هر ۳ دقیقه
@@ -393,7 +393,7 @@ function saveIds(ids){ try { localStorage.setItem("qg_seen", JSON.stringify(ids)
 
 function announce(v){
   $("alertText").textContent = "ویدیو تازه: " + v.title;
-  $("alertLink").href = (v.kind === "short" ? "https://www.youtube.com/shorts/" : "https://www.youtube.com/watch?v=") + encodeURIComponent(v.video_id);
+  $("alertLink").href = (v.durationSeconds && v.durationSeconds <= 180 ? "https://www.youtube.com/shorts/" : "https://www.youtube.com/watch?v=") + encodeURIComponent(v.video_id);
   $("alert").classList.add("on");
   document.title = "● ویدیو تازه | QGAMING";
   if ("Notification" in window && Notification.permission === "granted") {
