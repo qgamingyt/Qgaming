@@ -84,7 +84,7 @@ footer{text-align:center;color:#827494;font-size:.75rem;margin-top:42px;padding-
 <script>
 const CONFIG = {
   // کلید YouTube Data API v3 برای اتصال کانال تنظیم شده است.
-  YOUTUBE_API_KEY: "AIzaSyDoNMT5D8qAbIe2a47lq-B09wzonZud6Uk",
+  YOUTUBE_API_KEY: "AIzaSyCoGi8PrwnhPUxDOjbI_5bO-89CpDP0vZI",
   CHANNEL_HANDLE: "@QGAMING_ir",
   CHANNEL: "https://youtube.com/@QGAMING_ir",
   POLL_MS: 180000, // بررسی خودکار ویدیوهای تازه هر ۳ دقیقه
@@ -267,6 +267,7 @@ async function youtubeGet(resource, params={}){
       keyInvalid:"کلید YouTube API نامعتبر است.",
       accessNotConfigured:"YouTube Data API v3 در پروژه Google Cloud فعال نشده است.",
       quotaExceeded:"سهمیه روزانه YouTube API تمام شده است.",
+      API_KEY_SERVICE_BLOCKED:"دسترسی این کلید به YouTube Data API مسدود است؛ محدودیت API کلید را بررسی کنید.",
       ipRefererBlocked:"محدودیت دامنه (HTTP referrer) کلید API اجازه این سایت را نمی‌دهد.",
       refererNotAllowed:"دامنه فعلی در محدودیت HTTP referrer کلید API مجاز نیست."
     };
